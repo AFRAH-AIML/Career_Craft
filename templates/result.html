@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CareerCraft Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: linear-gradient(130deg, #667eea, #764ba2);
+      color: white;
+      margin: 0;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: #FFD700;
+      margin-top: 40px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .confidence {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 12px 30px;
+      background-color: white;
+      color: #4e54c8;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #f1f1f1;
+      transform: scale(1.05);
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #FFD700;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">🎓 Career<span>Craft</span></div>
+  <div class="container">
+    <h1>Here’s Your Career Match!</h1>
+
+    <div class="section">
+      <h2>🎯 Best Career Match: {{ result.career_match }}</h2>
+      <p class="confidence">Confidence Score: {{ result.confidence_best }}</p>
+      <p><strong>Missing Skills:</strong></p>
+      <ul>
+        {% for skill in result.missing_skills_best %}
+          <li>{{ skill }} - <a href="{{ result.youtube_links_best[skill] }}" target="_blank">YouTube Tutorial</a></li>
+        {% endfor %}
+      </ul>
+      <p><strong>Top Companies Hiring:</strong> {{ result.top_companies_best | join(', ') }}</p>
+    </div>
+
+    <hr style="border: 1px solid rgba(255,255,255,0.2);">
+
+    <div class="section">
+      <h2>🔁 Alternative Career Option: {{ result.alt_career }}</h2>
+      <p class="confidence">Confidence Score: {{ result.confidence_alt }}</p>
+      <p><strong>Missing Skills:</strong></p>
+      <ul>
+        {% for skill in result.missing_skills_alt %}
+          <li>{{ skill }} - <a href="{{ result.youtube_links_alt[skill] }}" target="_blank">YouTube Tutorial</a></li>
+        {% endfor %}
+      </ul>
+      <p><strong>Top Companies Hiring:</strong> {{ result.top_companies_alt | join(', ') }}</p>
+    </div>
+
+    <a href="/quiz" class="btn">🔁 Take the Quiz Again</a>
+  </div>
+</body>
+</html>
