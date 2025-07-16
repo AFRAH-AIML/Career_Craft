@@ -1,7 +1,5 @@
 import random
 import pandas as pd
-
-# Define career profiles
 career_profiles = {
     "Data Scientist": {
         "skills": ["Python", "SQL", "Statistics", "Data Visualization", "Machine Learning"],
@@ -94,20 +92,14 @@ career_profiles = {
         "related": ["UI/UX Designer", "Technical Writer"]
     }
 }
-
-# Extract all unique personality types
 all_personalities = sorted({p for c in career_profiles.values() for p in c["personalities"]})
-
-# Initialize dataset
 data = []
-
-# Generate 3000 realistic rows
 for _ in range(3000):
     base_career = random.choice(list(career_profiles.keys()))
     base_skills = career_profiles[base_career]["skills"]
     related_careers = career_profiles[base_career]["related"]
 
-    # Select 3–4 from base career and 1–5 from related
+    
     selected_skills = set(random.sample(base_skills, k=random.randint(3, 4)))
     for rel in related_careers:
         rel_skills = career_profiles[rel]["skills"]
@@ -116,10 +108,10 @@ for _ in range(3000):
             break
     selected_skills = list(selected_skills)[:10]
 
-    # Randomly select personality types
+    
     selected_personalities = random.sample(all_personalities, k=random.randint(1, 3))
 
-    # Score each career
+    
     scores = []
     for name, props in career_profiles.items():
         req_skills = set(props["skills"])
@@ -132,11 +124,11 @@ for _ in range(3000):
     best_career, _, best_match, best_skills = scores[0]
     alt_career, _, _, alt_skills = scores[1]
 
-    # Compute missing skills
+    
     missing_best = list(best_skills - set(selected_skills))
     missing_alt = list(alt_skills - set(selected_skills))
 
-    # Calculate salary
+    
     min_sal, max_sal = career_profiles[best_career]["salary_range"]
     if best_match >= len(best_skills) - 1:
         salary = max_sal
@@ -146,7 +138,6 @@ for _ in range(3000):
         ratio = best_match / len(best_skills)
         salary = int(min_sal + (max_sal - min_sal) * ratio)
 
-    # Append row
     data.append({
         "selected_skills": ", ".join(selected_skills),
         "personality_types": ", ".join(selected_personalities),
@@ -156,8 +147,6 @@ for _ in range(3000):
         "missing_skills_best": ", ".join(missing_best),
         "missing_skills_alt": ", ".join(missing_alt)
     })
-
-# Save dataset
 df = pd.DataFrame(data)
 df.to_csv("valid_career_dataset.csv", index=False)
 print("✅ Dataset saved as 'valid_career_dataset.csv'")
