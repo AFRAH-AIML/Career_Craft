@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CareerCraft | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Raleway', sans-serif;
+      height: 100vh;
+      background: linear-gradient(130deg, #6C63FF, #3F51B5, #009688);
+      background-size: 600% 600%;
+      animation: gradient 15s ease infinite;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease;
+    }
+
+    p {
+      font-size: 1.4rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .btn {
+      padding: 15px 40px;
+      background-color: #ffffff;
+      color: #3F51B5;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-decoration: none;
+      border-radius: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 2s ease;
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+
+    .typewriter {
+      display: inline-block;
+      border-right: 3px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 4s steps(40, end) forwards, blink 0.75s step-end infinite;
+      width: 0;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎓 Welcome to CareerCraft</h1>
+  <p class="typewriter">Craft your future with skill, insight, and purpose.</p>
+  <a href="/quiz" class="btn">✨ Take the Quiz</a>
+</body>
+</html>

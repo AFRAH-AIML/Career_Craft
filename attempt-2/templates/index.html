@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CareerCraft Quiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: linear-gradient(to right, #4e54c8, #8f94fb);
+      color: white;
+      padding: 40px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+    }
+
+    form {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    label {
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: block;
+      margin-top: 20px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .checkbox-group label {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 10px 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .checkbox-group input {
+      display: none;
+    }
+
+    .checkbox-group input:checked + label {
+      background-color: #ffffff;
+      color: #4e54c8;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      margin-top: 10px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      margin-top: 30px;
+      padding: 15px;
+      background-color: white;
+      color: #4e54c8;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.03);
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #FFD700;
+    }
+
+    .meanings {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 10px 20px;
+      border-radius: 15px;
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">🎓 Career<span>Craft</span></div>
+
+  <h1>Find Your Perfect Career</h1>
+  <form method="POST" action="/predict">
+    <label>Select Your Skills (choose up to 10):</label>
+    <div class="checkbox-group">
+      {% for skill in skills %}
+        <div>
+          <input type="checkbox" name="skills" value="{{ skill }}" id="skill_{{ loop.index }}">
+          <label for="skill_{{ loop.index }}">{{ skill }}</label>
+        </div>
+      {% endfor %}
+    </div>
+
+    <label>Select Your Personality Types (up to 3):</label>
+    <div class="checkbox-group">
+      {% for p in personalities %}
+        <div>
+          <input type="checkbox" name="personalities" value="{{ p }}" id="personality_{{ loop.index }}">
+          <label for="personality_{{ loop.index }}">{{ p }}</label>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="meanings">
+      <strong>Personality Letter Meanings:</strong><br>
+      {% for key, value in personality_meanings.items() %}
+        <strong>{{ key }}</strong>: {{ value }}{% if not loop.last %}, {% endif %}
+      {% endfor %}
+    </div>
+
+    <label for="expected_salary">Expected Salary (INR):</label>
+    <input type="number" name="expected_salary" required />
+
+    <button type="submit">🔍 Discover My Career Path</button>
+  </form>
+</body>
+</html>
